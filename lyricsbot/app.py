@@ -68,7 +68,7 @@ def callback_inline(call):
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text="Write the author song!"
+            text="Escreva a música do autor!"
         )
 
         update_user_state(call.message.chat.id, 1)
@@ -122,12 +122,12 @@ def render_initial_keyboard(message):
     keyboard = types.InlineKeyboardMarkup()
 
     keyboard.row(
-        types.InlineKeyboardButton("Press me!", callback_data="author")
+        types.InlineKeyboardButton("Letra!", callback_data="author")
     )
 
     bot.send_message(
         message.chat.id,
-        "If you wanna receive lyrics, press the button and follow the instructions:",
+        "Se pretender receber letras, prima o botão e siga as instruções: ",
         reply_markup=keyboard
     )
 
