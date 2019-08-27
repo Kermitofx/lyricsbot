@@ -48,7 +48,7 @@ bot = telebot.TeleBot(TOKEN)  # pylint: disable=C0103
 @bot.message_handler(commands=['start'])
 def msg(message):
     """
-    Initial actions on the first message.
+    Ações iniciais na primeira mensagem.
     """
     create_user_state_table()
     insert_chat_id_to_user_state(message.chat.id)
@@ -62,7 +62,7 @@ def msg(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     """
-    Get the first message, change user state to 1.
+    Obter a primeira mensagem, alterar o estado do usuário para 1.
     """
     if call.data == "author":
         bot.edit_message_text(
@@ -77,15 +77,15 @@ def callback_inline(call):
 @bot.message_handler(func=lambda message: True)
 def handle_request_text(message):
     """
-    Get the second message, change user state to 2.
+    Obtenha a segunda mensagem, altere o estado do usuário para 2.
 
-    Return the complete user song.
+    Retorne a música completa do usuário.
     """
     if get_user_state(message.chat.id) == 1:
         get_user_state(message.chat.id)
 
         bot.send_message(
-            message.chat.id, "Write the song name!"
+            message.chat.id, "Escreva o nome da música!"
         )
 
         update_user_state(message.chat.id, 2)
@@ -109,7 +109,7 @@ def handle_request_text(message):
         # Message was too long. Current maximum length is 4096 UTF8 characters
         except ApiException:
             bot.send_message(
-                message.chat.id, "The song is not available, sorry."
+                message.chat.id, "A música não está disponível, desculpe."
             )
 
         render_initial_keyboard(message)
@@ -117,7 +117,7 @@ def handle_request_text(message):
 
 def render_initial_keyboard(message):
     """
-    Creates the initial inline keyboard.
+    Cria o teclado inline inicial.
     """
     keyboard = types.InlineKeyboardMarkup()
 
